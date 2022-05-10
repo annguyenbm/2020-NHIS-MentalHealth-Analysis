@@ -1,0 +1,168 @@
+---
+title: "Mental Health and the 2020 National Health Interview Survey: App Vignette"
+author: "Binh Minh An Nguyen, Ben Stano, and Andrew Erickson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Introduction
+
+Mental Health and the 2020 National Health Interview Survey allows users to better understand, visualize, and examine the relationships between select variables within the 2020 National Health Interview Survey (NHIS). Descriptions of the app use cases, underlying packages, and functionality appear below. 
+
+
+## Use Case 
+
+### The Problem 
+
+Anxiety and depression are of increasing concern among US adults. A *New York Times* analysis in late 2021 found that, among 1,320 therapists surveyed, approximately 90 percent had seen an increase in demand for mental health care (Dwyer). Four in 10 Americans said in a 2021 American Psychiatric Association survey that they felt more anxious than in 2020 (American). And more than 21 million US adults reported at least one bout with depression in 2020, according to the National Survey on Drug Use and Health released in 2021 (Major). These spikes, particularly in the context of a global pandemic, are obviously alarming. 
+
+### The Question at Hand 
+
+in general, what are the factors that tend to be associated with severe anxiety and depression? What are the attributes or characteristics among individuals that might serve as warning signs for these serious conditions? 
+
+### Intended Users
+
+Using the results of the 2021 National Health interview survey, which expanded its questioning on mental health care and mental health care access in 2019 (Preliminary), this app is intended to serve as a tool that allows health care administrators and other health care professionals to examine the demographic, behavioral, and other attributes that tend to be associated with severe anxiety and depression. This is no way qualifies as grounds for a diagnosis, but it can serve as a resource--among others--to allow health care professionals to ensure that these individuals do not fall through the cracks. This will be done through examining univariate distribution plots, conducting bivariate tests of dependence or significance, and building logistic regression and other models based on these variables.
+
+Additionally, survey design professionals and others associated with the National Health Interview Survey might seek a cleaner, speedier, and easier-to-understand summary of their results and strive to more quickly understand the distributions of and relationships between question responses to both learn more about human behavior during interviews and shape future interview questions. 
+
+And finally, this problem of identifying factors that tend to be associated with severe anxiety and depression can also be addressed through this app by interested members of the general public. According to Stanford Medicine, at least 1 in 10 Americans face a major depressive disorder at some point in their life (Major Depression). That means the vast majority of people either themselves encounter depression *or* know someone who had, has, or will have a severe depression or anxiety. Having a basic understanding of attributes that tend to coincide with severe anxiety and depression will help individuals better identify the warning signs for both. 
+
+
+## Required Packages
+
+The following packages are used in the building of the application: 
+
+**{shiny}** Version 1.7.1: This package allows for the building and display of the app itself.
+
+**{bslib}** Version 0.3.1: bslib allows for the use of a theme in the back end design of the app. 
+
+**{tidyverse}** Version 1.3.1: Tidyverse and its contained functions play several roles within the app. These include: 
+
+- {readr} (Version 2.1.1): For reading in RDS files. 
+
+- {dplyr} (Version 1.0.7): For performing various variable selection and data reshaping operations. 
+
+- {stringr} (Version 1.4.0): For renaming variables within the metadata data frame.
+
+- {ggplot2} (Version 3.3.5): For building several plots, including in the EDA and Chi Square/ANOVA tabs. 
+
+- {forcats} (Version 0.5.1): For releveling months within the interview_month factor variable.
+
+**{ggmosaic}**: (Version 0.3.3) For plotting distributions of levels across two factor variables in the chi square tab. 
+
+**{DT}**: (Version 0.21) For building the interactive data dictionary, based on selected variables, in the final tab. 
+
+**{broom}**: (Version 0.7.11) For creating a tidy data frame from glm coefficient (log odds) outputs and derived odds outputs in the logistic regression tab. 
+
+**{gridExtra}**: (Version 2.3) In earlier versions of the app, for arranging plots in a single column, directly beneath each other, in the EDA tab. 
+
+**{tree}**: (Version 1.0.41) For building the classification tree model in the classification tree tab. 
+
+**{reshape2}** (Version 1.4.4) For melting the classification predictions data frames in both the logistic regression and classification trees tabs. 
+
+**{randomForest}** (Version 4.6.14) For building and displaying the results of random forest models in the variable importance tab. 
+
+
+## Data Source and Structure 
+
+The default data source for this application is the 2020 National Health Interview Survey from the Centers for Disease Control and Prevention's National Center for Health Statistics (NHIS). It contains responses from 31,568 US adults--and represents what is *intended* to be a representative sample of the US population. Each survey subject is organized into a row, and more than 600 questions asked and attributes recorded are the basis for columns. While a few are numeric, the vast majority are categorical. A numeric coding system for factor variables means that app organizers were required to recode factor levels with their actual (or, in some cases, aggregate) values. An explanation of these variables, how they appeared initially in the 2020 NHIS, and how they were transformed for user convenience in the app can be found in the app data dictionary. 
+
+Additionally, the data in this app represent just a subset of the more than 600 variables contained within the adult responses to the 2020 NHIS. For user convenience, 45 variables have been selected for analysis and testing in the context of examining severe anxiety and depression. These include standard demographics like region, age, gender, race, and family income. But they also feature individual variables and variable themes that research has shown have a link to severe anxiety and depression. Among these variable themes are exercise, cardiorespiratory fitness and strength, as those with limited levels of both were twice as likely to experience depression and 60 percent more likely to express symptoms of anxiety in a 2020 BMC Medicine study (Kandola); access to health care, as lower levels of access (and ability to afford care) have shown links to lower levels of overall health across the board (Haley); food insecurity, which was linked to lower physical and mental wellbeing in a study of subjects in 149 countries in 2017 (Jones); and pain, which a 2016 Mayo Clinic study found to have a bidirectional relationship with depression (Hooten). Additional relationships with severe anxiety and depression should be examined in subsequent versions of the app. 
+
+## Using the App 
+
+### EDA Functionality
+
+First, we recommend reading more about each variable to understand the question that prompted the responses in each variable, the levels of responses within each variable, and any transformations that have been made to the data, whether cosmetic or aggregation. Next, read through the app introduction to learn more about the National Health Interview Survey, how its data is structured, its potential shortcomings, and warnings regarding analysis of this data. 
+
+Then, having selected a variable of interest--whether a response variable of anxiety or depression frequency or what will later be examined as a predictor of those variables--click into the EDA tab. Use the "select variable" dropdown on the left sidebar and click on the variable of interest. This will display a distribution of the variable by its factor levels or by numeric value. All months of 2020 and Census regions are selected by default to present the full set of responses. These can, however, be filtered by deselecting these values down to the months and regions of interest. And, if it allows for smoother examination of the distribution plot and the variable is a factor variable, selecting "Flip Coordinates on Factors" will flip the x and y coordinates of this plot. 
+
+A limited number of null values may be important in modeling risk factors of severe anxiety and depression. Selecting "Show metadata" will display the distribution of whether a question was answered, or whether the subject refused to answer, an answer was otherwise not ascertained, or whether the question was missing entirely from the subject survey. A high number of "missing" responses might inject some skepticism into that variable's analysis. For example, cv19_diag_positive, which asks whether a subject has ever tested positive for COVID-19, has more than 13,000 "missing" responses, leading one to suggest that this question was not asked throughout 2020. Quick manipulation of tab inputs shows that responses were all "NA" until July 2020. This tab helps users understand the shape of their variables of interest, and examine whether these variables of interest should continue as such into the testing tabs of the app. 
+
+### Dependence and Other Relationship Testing 
+
+Next, the user will examine bivariate relationships in the Chi Square tab. While we encourage users to examine a variable's relationship with severe anxiety (anxiety_freq) and severe depression (depression_freq) first, the tab's functionality allows for an examination of the relationship between any two variables in the data set. 
+
+Selecting variables from the dropdowns (select the first variable and select the second variable) will display a mosiac plot (if both variables are factor variables) to show the bivariate distribution of factor levels for these two variables and allow for an examination of proportions across levels. For example, when examining pain_freq and anxiety_freq, it is evident that those who provided a "severe" answer for anxiety_freq have a higher relative proportion of subjects who answered that they experience pain "Every Day," whereas those who gave a "non-severe" answer had a higher proportion of people who "Never" experienced pain. 
+
+A factor variable and a numeric variable will return a series of boxplots, and two numeric variables (a rarer occurrence in this data set) will return a scatter plot. The same set of month and region filter inputs used in the EDA tab appear in this tab as well and have the exact same functionality. 
+
+When two factor variables are selected, a summary printout of a chi square test will appear. If the number near "p-value" is reasonably small (say, less than 0.05), then one can reject the null hypothesis of independence between the two variables and assume that they are in fact statistically dependent in a way that is highly unlikely to be due to random chance. 
+
+When a factor variable and a numeric variable are selected, a summary printout of an ANOVA test will appear. If the test statistic, labeled Pr(>F), is below a predetermined threshold, then one can reject the null hypothesis that there is no difference in means of the numeric variable across factor levels. 
+
+And finally, when two numeric variables are selected, the correlation (which is between -1 and 1) is displayed. For example, the correlation between house_people_number, or household size, and poverty_rate, or poverty ratio (family income relative to the poverty line) is near zero, suggesting these variables do not tend to move together, either in the same or opposite directions. 
+
+These tests and plots are useful for examining which variables have a significant, dependent relationship with anxiety_freq and depression_freq, which can inform model building in subsequent tabs. It is also useful for examining which predictors are dependent on each other and should probably not *both* be used in model building. For example, food_runout_worry might pick up the effects of food_not_last_m, as they are food security variables with a significant chi square statistic. 
+
+### Logistic Regression: Model Building and Testing
+
+For more statistically savvy users looking to go beyond descriptive statistics, this app also provides functionality for basic logistic regression modeling. 
+
+In the Logistic Regression tab, a user must first click the button by an outcome variable--either a binary variable indicating severe anxiety (anxiety_freq) or a binary variable indicating severe depression (depression_freq). 
+
+Then, the user will select predictor variables by clicking on at least one. As those variables are selected, coefficients and other model statistics will display. These statistics include the odds, probability, and p-value of that coefficient. For--an obvious--example, if anxiety_freq is the response variable and only anxiety_med (whether a person is medicated for anxiety) is the predictor, we see that a subject taking medication for anxiety (Yes) increases the log odds of the person having severe anxiety by 2.01. It also increases the odds of the subject having severe anxiety by a factor of 7.45, and the p-value is approximately zero. Using interview month as the predictor, however, suggests that there are not significantly higher log odds of severe anxiety in other months relative to January. 
+
+The latter portion of the tab focuses on testing. The user should select a proportion of the data set on which to train the model. The remainder will then be used to test the model built by the user. Two line printouts in the sidebar display how many rows will be used for both the train and test set. 
+
+If the user selects "check prediction outcome," both a confusion matrix and test results will be displayed. Again using the anxiety_med (medicated for anxiety) example--and using a 70 percent split--as well as a default 50 percent classification threshold, we see that the model correctly predicts non-severe anxiety in more than 21,000 subjects and correctly predicts severe anxiety in more than 2,600 cases. However, the model incorrectly predicts non-severe anxiety more than twice as much. An overall accuracy rate of 0.78 suggests that the model makes the correct prediction 78 percent of the time, but a low sensitivity (0.33) and higher specificity (0.94) indicates that the model is strong at predicting negatives (in this case, non-severe anxiety) and quite poor at predicting positives (in this case, severe anxiety). This example can be applied to the thousands of other models that may be made using this tab. 
+
+### Classification Tree Model Building and Testing 
+
+The user may also use the app to build classification tree models, which can be useful because they are nonparametric and do not require extensive assumption testing, and because they provide a useful visual aid in determining which factors shape the outcome variable. 
+
+This tab follows a similar setup to the logistic regression tab. The user will select one of two outcome variables and pick at least one predictor with the option of selecting more than one. 
+
+An added wrinkle is a "select mindev" slider. The mindev is the reduction in deviance at which the tree stops producing a split. So, for example, with a mindev of .01, the tree will stop splitting if the deviance is .01 (or 1 hundredth) of what it was at the root. In general, a smaller mindev produces a bigger tree, and a bigger mindev a smaller tree. A tree will display, with probabilities at each node. For example, again using anxiety_med as a predictor of anxiety_freq, it is shown that when anxiety_med is no, there is around a 19 percent probability of severe anxiety, compared to around 64 percent when anxiety_med is "yes." When pain_freq is added to the model in addition to anxiety_med and the mindev is 0.0005, another split appears beneath the main split. It indicates that if a person is not medicated for anxiety and reports pain some days or never, their probability of severe anxiety is .1718. But, if they report pain most days or every day, the probability increases to .2952. 
+
+In this tab, based on train data set split slider (a replica of the slider that appears in the logistic regression tab), model prediction results on the test set are automatically displayed. These include total predictions in each case; 0 in Prediction and FALSE in Actual, in the example we have been discussing, is a correct prediction of non-severe anxiety, while 1 in prediction and FALSE in Actual is an incorrect prediction of severe anxiety. Beneath those totals is a set of five statistics based on that first table: accuracy, error, sensitivity, specificity, and falpos, or the false positive rate. These are a replica of the model measurements displayed in the logistic regression tab (explained above).
+
+It is suggested to build both logistic regression and tree models using the same variables to compare results and to provide a more complete picture of individual variable effects on outcome (logistic regression) because trees most often will not split by every predictor contained within the model. 
+
+### Random Forest and Variable Importance 
+
+The user may use this tab to build random forest models. These models are unique because they employ bootstrapping, or bagging, which allows for variable importance visualizations.
+
+Bagging refers to the use of sampling with replacement. While this commonly refers to sampling entire rows of data with replacement, in the case of random forests, rows of data AND predictor sets are sampled. Random forest models sample a set of predictors, fit a simple tree model using said predictors, compile what it learns from that tree, then it repeats on a new predictor set. Each iteration, the model learns more about each predictor and its affect on the data. The result is an ensemble model using all the information it learned from the smaller trees.
+
+Random Forests also provide greater insight into how well a variable functions as a predictor. While many models allow for such analysis through application of p-values from various model configurations, random forests enable direct comparison between predictors in a much more human-readable way.
+
+It this tab, users are asked to which value they would like to predict, anxiety or depression frequency. Then, they select which variables should be used as predictors. Because of the complex nature of ensemble models like random forests, we chose to limit users to a maximum of 10 predictors in a fitted model. This limit is needed to ensure app stability. The users are also able to choose what proportion of the data should go into training and testing the model. Next, users choose how many trees to fit. Increasing the number of trees fit improves the random forest model while increasing computational cost. We have chose to limit users to 300 trees in a fitted model. For most predictor configurations, the random forest model had a stable classification accuracy after 50 trees, so 300 should be sufficient. Finally, users chose how many parameters to put into each tree. Each tree in a random forest can use all available predictors or just one. 
+
+This tab also displays the output of the specified random forest model. The top plot shows the classification rate at each tree iteration. Lower, a variable importance graph is shown. Variable importance graphs measure the variable importance in 2 different ways: on the left, how much accuracy a model loses when that variable is not included, and on the right, how much purity increases when that variable is used to split a node (how good are the choices made using the variable). Below these two plots are tables showing a breakdown of the test classification accuracy of the fitted model.
+
+## References 
+
+Dwyer, Kate. “Why Therapists Are Worried about Mental Health in America Right Now.” The New York Times, The New York Times, 3 Jan. 2022, https://www.nytimes.com/2022/01/03/insider/therapists-mental-health-usa-america.html. 
+
+American Psychiatric Association, American Psychiatric Association, 2 May 2021, https://www.psychiatry.org/newsroom/news-releases/new-apa-poll-shows-sustained-anxiety-among-americans-more-than-half-of-parents-are-concerned-about-the-mental-well-being-of-their-children. 
+
+“Major Depression.” National Institute of Mental Health, U.S. Department of Health and Human Services, 2022, https://www.nimh.nih.gov/health/statistics/major-depression. 
+
+“Preliminary Evaluation of the Impact of the 2019 National Health Interview Survey Questionnaire Redesign and Weighting Adjustments on Early Release Program Estimates.” National Center for Health Statistics, Centers for Disease Control and Prevention, 2020, https://www.cdc.gov/nchs/data/nhis/earlyrelease/EReval202009-508.pdf. 
+
+“Major Depression and Genetics.” Genetics of Brain Function, Stanford Medicine, 2022, https://med.stanford.edu/depressiongenetics/mddandgenes.html. 
+
+“NHIS - 2020 NHIS.” Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 30 Sept. 2021, https://www.cdc.gov/nchs/nhis/2020nhis.htm. 
+
+Kandola, Aaron, et al. “Individual and Combined Associations between Cardiorespiratory Fitness and Grip Strength with Common Mental Disorders: A Prospective Cohort Study in the UK Biobank - BMC Medicine.” BioMed Central, BioMed Central, 11 Nov. 2020, https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-020-01782-9. 
+
+Haley, Jennifer, et al. “Parents with Low Incomes Faced Greater Health Challenges and Problems Accessing and Affording Needed Health Care in Spring 2021.” Urban Institute, 15 Jan. 2022, https://www.urban.org/research/publication/parents-low-incomes-faced-greater-health-challenges-and-problems-accessing-and-affording-needed-health-care-spring-2021. 
+
+Jones, Andrew. “Food Insecurity and Mental Health Status: A Global Analysis of 149 Countries.” American Journal of Preventive Medicine, 27 Apr. 2017, https://www.sciencedirect.com/science/article/pii/S074937971730243X. 
+
+Hooten, W Michael. “Chronic Pain and Mental Health Disorders.” Mayo Clinic Proceedings, Symposium on Pain Medicine, 22 June 2016, https://www.mayoclinicproceedings.org/article/S0025-6196(16)30182-3/fulltext. 
+
