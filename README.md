@@ -1,8 +1,8 @@
 # 2020 NHIS Mental Health Data Analysis Application
 
-This is an R Shiny App using the 2020 National Health Interview Surveillance data. This application is designed to offer general public who are interested in statistics/data analysis in health segment, health care professionals, administrators, and health survey designers a statistics-educated tool to explore, visualize, model, and understand the collected data in a clearer format.
+This is an R Shiny App using the 2020 National Health Interview Surveillance data to examine which factors contributed to the anxiety and depression among US adults. This application is designed to offer general public who are interested in statistics/data analysis in health segment, health care professionals, administrators, and health survey designers a statistics-educated tool to explore, visualize, model, and understand the collected data in a clearer format.
 
-Our app contains 7 tabs, including:
+The application contains 7 tabs, including:
 
   * **Introduction tab**: explains the general framework of the 2020 National Health Interview Survey and the subset of data used in the app;
   * **EDA tab**: allows users to explore the data type and the distribution of each variable, and the extent to which the question was answered by the more than 30,000 subjects;
@@ -15,6 +15,41 @@ Our app contains 7 tabs, including:
 
 ## Launching App
 
+The application currently has not yet been hosted on any public domain. Link to interact with the live application will be updated soonest!
+
+However, users can access our application via cloning a GitHub repo and Pull request, download source zip file, or contact one of the three App Collaborators for permissions. 
+
+Required software: R, R studio. Recommend **version 4.1.0** onward.
+
+Packages to be installed before launching the application:
+
+  * **shiny** - build interactive web application in R
+  * **bslib** - create app theme
+  * **tidyverse** - R package designed for data science
+  * **ggmosaic** - visualize categorical data
+  * **DT** - R interface to js library table
+  * **broom** - tidy up messy output into a data frame
+  * **forcats** - use factors to handle categorical variables
+  * **gridExtra** - provide user-level functions to work with grid graphics
+  * **tree** - develop, modify, and process decision trees
+  * **reshape2** - restructure and aggregate data
+  * **randomForest** - implement Breinman's random forest algorithm
+  
+0.1. To install these R packages, input the following commands into R Console then press enter.
+
+```{r}
+install.packages("<package_name>")
+```
+
+0.2. Once the packages are installed, set working path directory or open project in R
+
+0.3. Access the '/NHIS_App/' folder path, open the **app.R** script
+
+0.4. Click **Run App** button at the top tool bar
+
+## App Status
+
+The current version of this app is operational and ready for use. Please report any errors or change recommendations to the three collaborators, whose contact information is listed below.
 
 ## App Collaborators and Contact Information
 
@@ -23,15 +58,3 @@ Our app contains 7 tabs, including:
 **Emails:** bn6523a@student.american.edu (Binh Minh An Nguyen); bs3654a@student.american.edu (Ben Stano); andrewe@american.edu (Andrew Erickson)
 
 **GitHub IDs:** annguyenbm (Binh Minh An Nguyen); bstano (Ben Stano); andrew-r-erickson (Andrew Erickson)
-
-
-
-## App Status
-
-The application currently has not yet been hosted on any public domain. However, users can access our application via cloning a GitHub repo and Pull request, or contact one of the three App Collaborators. 
-
-The current version of this app is operational and ready for use. Please report any errors or change recommendations to the three collaborators, whose contact information is listed above.
-
-
-
-
