@@ -15,9 +15,11 @@ The application contains 7 tabs, including:
 
 ## Launching App
 
-The application currently has not yet been hosted on any public domain. Link to interact with the live application will be updated soonest!
+The application is currently hosted on ShinySever. Users can access our App directly here: https://arerickson.shinyapps.io/nhisproduction/
 
-However, users can access our application via cloning a GitHub repo and Pull request, download source zip file, or contact one of the three App Collaborators for permissions. 
+Otherwise, the application can also be accessed or launched on local computer via cloning a GitHub repo and Pull request, downloading source zip file, or contacting one of the three App Collaborators for permissions. 
+
+The App Demo presentation is currently not published, but if users face any constraints in exploring or using the App, users can contact one of the 3 App Collaborators to request for the presentation link.
 
 Required software: R, R studio. Recommend **version 4.1.0** onward.
 
