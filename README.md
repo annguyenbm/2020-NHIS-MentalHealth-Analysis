@@ -17,7 +17,7 @@ The application contains 7 tabs, including:
 
 The application is currently hosted on ShinySever. Users can access our App directly here: https://arerickson.shinyapps.io/nhisproduction/
 
-Otherwise, the application can also be accessed or launched on local computer via cloning a GitHub repo and Pull request, downloading source zip file, or contacting one of the three App Collaborators for permissions. 
+Otherwise, the application and coding can also be accessed or launched on local computer via cloning a GitHub repo and Pull request, downloading source zip file via release version **v0.1.0**, or contacting one of the three App Collaborators for further permissions. 
 
 The App Demo presentation is currently not published, but if users face any constraints in exploring or using the App, users can contact one of the 3 App Collaborators to request for the presentation link.
 
