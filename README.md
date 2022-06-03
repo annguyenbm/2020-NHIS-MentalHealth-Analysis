@@ -29,7 +29,9 @@ Last but not least, please report any errors or change recommendations to the 3 
 **A. Software**
 
 Install R : https://cran.r-project.org/
+
 Install RStudio: https://www.rstudio.com/products/rstudio/ 
+
 Recommend **version 4.1.0** onward.
 
 **B. Packages**
