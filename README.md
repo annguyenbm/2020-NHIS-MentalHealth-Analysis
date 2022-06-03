@@ -11,19 +11,28 @@ The application contains 7 tabs, including:
   * **Classification Tree tab**: builds and visualizes the tree models to predict the mental health severity;
   * **Random Forest tab**: predicts either the anxiety or depression status based on the variable importance;
   * **Dictionary tab**: provides definitions, levels, and transformations for each variable used in this application;
-  
 
-## Launching App
+## App Status
 
 The application is currently hosted on ShinySever. Users can access our App directly here: https://arerickson.shinyapps.io/nhisproduction/
 
 Otherwise, the application and coding can also be accessed or launched on local computer via cloning a GitHub repo and Pull request, downloading source zip file via release version **v0.1.0**, or contacting one of the three App Collaborators for further permissions. 
 
-The App Demo presentation is currently not published, but if users face any constraints in exploring or using the App, users can contact one of the 3 App Collaborators to request for the presentation link.
+Check App vignette for examples of how each tab works and how to interpret the results. The App Demo presentation is currently not published, but if users face any constraints in exploring or using the App, users can contact one of the 3 App Collaborators to request for the presentation link.
 
-Required software: R, R studio. Recommend **version 4.1.0** onward.
+Last but not least, please report any errors or change recommendations to the 3 collaborators, whose contact information is listed below.
 
-Packages to be installed before launching the application:
+## Launching App on Local Computer
+
+### Prerequisite 
+
+**A. Software**
+
+Install R : https://cran.r-project.org/
+Install RStudio: https://www.rstudio.com/products/rstudio/ 
+Recommend **version 4.1.0** onward.
+
+**B. Packages**
 
   * **shiny** - build interactive web application in R
   * **bslib** - create app theme
@@ -36,22 +45,42 @@ Packages to be installed before launching the application:
   * **tree** - develop, modify, and process decision trees
   * **reshape2** - restructure and aggregate data
   * **randomForest** - implement Breinman's random forest algorithm
+
+**C. Steps to launch**
   
-0.1. To install these R packages, input the following commands into R Console then press enter.
+1. Install the mentioned R packages: You can install these R packages by follow either of the following methods.
+  * **Auto Installation**
+  
+  Step 1: Download the App's R script and open it on RStudio
+  
+  Step 2: R will compare the packages listed in this App's R script against the existing library in the user's local computer. If there's any new package, R will auto-suggest user to install the new package. Thus, look for this system message on top of RStudio, right below the toolbar.
+  
+  Step 3: Click the installation link. The new ackage installation process will be run at the Console window.
+  
+  Step 4: Restart RStudio is highly recommended whenever a new package is installed.
+  
+  * **Manual Installation**
+  
+  Step 1: Open RStudio
+  
+  Step 2: Look for the Console window in RStudio
+  
+  Step 3: At the Console window, enter the following command
 
 ```{r}
 install.packages("<package_name>")
 ```
 
-0.2. Once the packages are installed, set working path directory or open project in R
+  Step 4: Restart RStudio once the packages are installed.
 
-0.3. Access the '/NHIS_App/' folder path, open the **app.R** script
+2. Set working direction path or open a new project in R
 
-0.4. Click **Run App** button at the top tool bar
+### Launch App 
 
-## App Status
+1. Access the '/NHIS_App/' folder path
+2. Open the R file **app.R**
+3. Click **Run App** button at the top tool bar
 
-The current version of this app is operational and ready for use. Please report any errors or change recommendations to the three collaborators, whose contact information is listed below.
 
 ## App Collaborators and Contact Information
 
@@ -60,3 +89,11 @@ The current version of this app is operational and ready for use. Please report 
 **Emails:** bn6523a@student.american.edu (Binh Minh An Nguyen); bs3654a@student.american.edu (Ben Stano); andrewe@american.edu (Andrew Erickson)
 
 **GitHub IDs:** annguyenbm (Binh Minh An Nguyen); bstano (Ben Stano); andrew-r-erickson (Andrew Erickson)
+
+**LinkedIn:**
+
+Binh Minh An Nguyen : www.linkedin.com/in/annguyenbm
+
+Andrew Erickson : https://www.linkedin.com/in/andrew-erickson-01373475/
+
+Ben Stano : https://www.linkedin.com/in/bstano/
