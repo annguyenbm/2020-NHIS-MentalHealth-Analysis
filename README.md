@@ -1,4 +1,4 @@
-# 2020 NHIS Mental Health Data Analysis Application
+# NHIS Mental Health Data Analysis Application
 
 This is an R Shiny App using the 2020 National Health Interview Surveillance data to examine which factors contributed to the anxiety and depression among US adults. This application is designed to offer general public who are interested in statistics/data analysis in health segment, health care professionals, administrators, and health survey designers a statistics-educated tool to explore, visualize, model, and understand the collected data in a clearer format.
 
